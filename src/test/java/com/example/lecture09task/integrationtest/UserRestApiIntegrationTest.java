@@ -336,7 +336,42 @@ public class UserRestApiIntegrationTest {
     }
 
     // DELETEメソッドで存在するIDを指定した時に、ユーザーが削除できステータスコード200とメッセージが返されること
+    @Test
+    @DataSet(value = "datasets/users.yml")
+    @ExpectedDataSet(value = "datasets/delete_users.yml")
+    @Transactional
+    void ユーザーが削除できること() throws Exception{
+        String response = mockMvc.perform(MockMvcRequestBuilders.delete("/users/3"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        JSONAssert.assertEquals("""
+            {
+            "message": "user successfully deleted"
+            }
+            """, response, JSONCompareMode.STRICT);
+    }
 
     // DELETEメソッドで存在しないIDを指定した時に、例外がスローされステータスコード404とエラーメッセージが返されること
+    @Test
+    @DataSet(value = "datasets/users.yml")
+    @Transactional
+    void 削除リクエストで指定したIDのユーザーが存在しない時に例外がスローされること() throws Exception{
+        String response = mockMvc.perform(MockMvcRequestBuilders.delete("/users/4"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
+        JSONAssert.assertEquals("""
+                    {
+                    "timestamp": "2023-06-05T18:13:22.414491+09:00[Asia/Tokyo]",
+                    "status": "404",
+                    "error": "Not Found",
+                    "message": "This id is not found",
+                    "path": "/users/4"
+                    }
+                """,
+                response,
+                new CustomComparator(JSONCompareMode.STRICT,
+                        new Customization("timestamp", ((o1, o2) -> true))));
+    }
 }
