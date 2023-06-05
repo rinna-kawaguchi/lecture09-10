@@ -1,6 +1,7 @@
 package com.example.lecture09task.integrationtest;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.Customization;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -57,7 +59,7 @@ public class UserRestApiIntegrationTest {
 
         JSONAssert.assertEquals("""
                     {
-                    "timestamp": ZonedDateTime.now().toString(),
+                    "timestamp": "2023-06-05T18:13:22.414491+09:00[Asia/Tokyo]",
                     "status": "404",
                     "error": "Not Found",
                     "message": "This id is not found",
@@ -148,10 +150,88 @@ public class UserRestApiIntegrationTest {
     }
 
     // POSTメソッドで正しくリクエストした時に、ユーザーが登録できステータスコード201とメッセージが返されること
+    @Test
+    @DataSet(value = "users.yml")
+    @ExpectedDataSet(value = "datasets/insert_users.yml", ignoreCols = "id")
+    @Transactional
+    void ユーザーが登録できること() throws Exception{
+        String response = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content("""
+                        {
+                        "name": "takahashi", 
+                        "age": 40
+                        }
+                        """))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        JSONAssert.assertEquals("""
+            {
+            "message": "user successfully created"
+            }
+            """, response, JSONCompareMode.STRICT);
+    }
 
     // POSTメソッドでリクエストのnameがnullの時に、ステータスコード400とエラーメッセージが返されること
+    @Test
+    @DataSet(value = "users.yml")
+    @Transactional
+    void 登録時のリクエストのnameがnullの時にエラーメッセージが返されること() throws Exception{
+        String response = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("""
+                        {
+                        "name": null, 
+                        "age": 40
+                        }
+                        """))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        JSONAssert.assertEquals("""
+            {
+                "timestamp": "2023-06-05T18:13:22.414491+09:00[Asia/Tokyo]",
+                "status": "400",
+                "error": "Bad Request",
+                "message": "Please enter your name and age",
+                "path": "/users"
+            }
+            """,
+                response,
+                new CustomComparator(JSONCompareMode.STRICT,
+                        new Customization("timestamp", ((o1, o2) -> true))));
+    }
 
     // POSTメソッドでリクエストのageがnullの時に、ステータスコード400とエラーメッセージが返されること
+    @Test
+    @DataSet(value = "users.yml")
+    @Transactional
+    void 登録時のリクエストのageがnullの時にエラーメッセージが返されること() throws Exception{
+        String response = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("""
+                        {
+                        "name": "takahashi", 
+                        "age": null
+                        }
+                        """))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        JSONAssert.assertEquals("""
+            {
+                "timestamp": "2023-06-05T18:13:22.414491+09:00[Asia/Tokyo]",
+                "status": "400",
+                "error": "Bad Request",
+                "message": "Please enter your name and age",
+                "path": "/users"
+            }
+            """,
+                response,
+                new CustomComparator(JSONCompareMode.STRICT,
+                        new Customization("timestamp", ((o1, o2) -> true))));
+    }
 
     // PATCHメソッドで存在するIDを指定した時に、ユーザーが更新できステータスコード200とメッセージが返されること
 
