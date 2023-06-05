@@ -5,13 +5,11 @@ import com.example.lecture09task.exception.ResourceNotFoundException;
 import com.example.lecture09task.form.CreateForm;
 import com.example.lecture09task.mapper.UserMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     public UserServiceImpl(UserMapper userMapper) {
@@ -19,7 +17,8 @@ public class UserServiceImpl implements UserService{
     }
 
     public User findById(int id) {
-        return userMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("This id is not found"));
+        return userMapper.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("This id is not found"));
     }
 
     public List<User> findByAge(Integer age) {

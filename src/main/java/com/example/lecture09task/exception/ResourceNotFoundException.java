@@ -1,6 +1,6 @@
 package com.example.lecture09task.exception;
 
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException() {
         super();
     }

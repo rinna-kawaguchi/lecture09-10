@@ -3,7 +3,6 @@ package com.example.lecture09task.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Objects;
 
 @Getter
