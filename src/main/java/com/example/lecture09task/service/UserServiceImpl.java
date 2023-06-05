@@ -50,7 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteUser(int id) {
-        userMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("This id is not found"));
+        userMapper.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("This id is not found"));
         userMapper.deleteUser(id);
     }
 }
