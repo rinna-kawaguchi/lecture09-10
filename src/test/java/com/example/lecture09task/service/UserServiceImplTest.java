@@ -11,17 +11,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -54,7 +53,7 @@ class UserServiceImplTest {
     @Test
     public void 指定した年齢以上のユーザーが返されること() {
         List<User> user = List.of(new User(3, "yamada", 35));
-        doReturn(Optional.of(user)).when(userMapper).findByAgeGreaterThan(30);
+        doReturn(user).when(userMapper).findByAgeGreaterThan(30);
 
         List<User> actual = userServiceImpl.findByAge(30);
         assertThat(actual).isEqualTo(user);
