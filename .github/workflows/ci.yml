@@ -58,9 +58,3 @@ jobs:
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
           job_name: 'Test Report'
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
