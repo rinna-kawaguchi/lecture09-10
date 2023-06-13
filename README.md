@@ -5,7 +5,7 @@
 ・JUnitによるテストコードを実装。  
 　- UserMapper, UserServiceImplの単体テスト  
 　- 結合テスト  
-・CIの実装（mainぷランチへのpush時、プルリクエスト時に実行）  
+・CIの実装（mainブランチへのpush時、プルリクエスト時に実行）  
 　- Checkstyle  
 　- 自動テスト
 
