@@ -31,8 +31,7 @@
 `Lecture09taskApplication.java`クラスを実行する。  
 
 - Postmanを起動し、実行したい操作に応じてHTTPメソッドの選択、URLの入力、
-リクエストボディの入力を行う。  
-詳細は４．API仕様を参照。  
+リクエストボディの入力を行う。詳細は４．API仕様書を参照。  
 
 **例：指定したIDのユーザーを更新**
 ![update-user-example.png](images%2Fupdate-user-example.png)
