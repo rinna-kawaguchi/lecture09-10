@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: UserAPI
+  description: |-
+    SwggerによるUserAPI仕様書です。
+  version: 1.0.0
+servers:
+  - url: https://http://localhost:8080
+tags:
+  - name: users
+    description: ユーザー管理に関する操作
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: ユーザーの全件取得または年齢検索
+      description: クエリパラメータで年齢を指定した場合は指定した年齢以上のユーザーを取得、年齢を指定しない場合はユーザーを全件取得する
+      parameters:
+        - name: age
+          in: query
+          description: 指定した年齢より上のユーザーが検索される
+          required: false
+          schema:
+            type: integer
+          example: 30
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      example: 3
+                    name:
+                      type: string
+                      example: yamada
+                    age:
+                      type: integer
+                      example: 35
+    post:
+      tags:
+        - users
+      summary: ユーザーの登録
+      description: ユーザーを登録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    nullable: false
+                    example: tanaka
+                  age:
+                    type: integer
+                    nullable: false
+                    example: 40
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: user successfully created
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                  Status:
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: Bad Request
+                  message:
+                    type: string
+                    example: Please enter your name and age
+                  path:
+                    type: string
+                    example: /users
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: ユーザーのid検索
+      description: 指定したIDのユーザーを取得する
+      parameters:
+        - name: id
+          in: path
+          description: 取得したいユーザーのid
+          required: true
+          schema:
+            type: number
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  name:
+                    type: string
+                    example: tanaka
+                  age:
+                    type: integer
+                    example: 25
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+    patch:
+      tags:
+        - users
+      summary: ユーザーの更新
+      description: 指定したIDのユーザーを更新する
+      parameters:
+        - name: id
+          in: path
+          description: 更新したいユーザーのid
+          required: true
+          schema:
+            type: number
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    nullable: true
+                    example: inoue
+                  age:
+                    type: integer
+                    nullable: true
+                    example: 
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: user successfully updateed
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+    delete:
+      tags:
+        - users
+      summary: ユーザーの削除
+      description: 指定したidのユーザーを削除する
+      parameters:
+        - name: id
+          in: path
+          description: 削除したいユーザーのid
+          required: true
+          schema:
+            type: number
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: user successfully deleted
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+components:
+  schemas:
+    NotFound:
+      description: 指定したリソースが存在しない場合のレスポンス
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        Status:
+          type: string
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        message:
+          type: string
+          example: This id is not found
+        path:
+          type: string
+          example: /users/4
+          
