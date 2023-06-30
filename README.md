@@ -21,8 +21,8 @@
 
 
 ## ３．起動手順
-- 自分のPCにリポジトリをgit cloneし、エディタでプロジェクトを開く。  
-`git clone https://github.com/rinna-kawaguchi/lecture09-10.git`  
+- 自分のPCにリポジトリをgit cloneする。  
+`git clone https://github.com/rinna-kawaguchi/UserAPI.git`
 
 - Dockerを起動し、ターミナルで以下のコマンドを実行する。  
 `docker compose up`  
@@ -39,7 +39,7 @@
 
 ## ４．API仕様書
 
-### [SwaggerによるAPI仕様書](https://rinna-kawaguchi.github.io/lecture09-10/dist/index.html)  
+### [SwaggerによるAPI仕様書](https://rinna-kawaguchi.github.io/UserAPI/dist/index.html)  
 
 ![swagger.png](images%2Fswagger.png)
 
