@@ -1,4 +1,4 @@
-package com.example.lecture09task.entity;
+package com.example.userapi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

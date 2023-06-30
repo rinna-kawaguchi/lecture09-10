@@ -1,7 +1,7 @@
-package com.example.lecture09task.service;
+package com.example.userapi.service;
 
-import com.example.lecture09task.entity.User;
-import com.example.lecture09task.form.CreateForm;
+import com.example.userapi.entity.User;
+import com.example.userapi.form.CreateForm;
 import java.util.List;
 
 public interface UserService {

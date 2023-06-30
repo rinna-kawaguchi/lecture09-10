@@ -1,4 +1,4 @@
-package com.example.lecture09task.exception;
+package com.example.userapi.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException() {

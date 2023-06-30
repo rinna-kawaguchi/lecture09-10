@@ -1,6 +1,6 @@
-package com.example.lecture09task.mapper;
+package com.example.userapi.mapper;
 
-import com.example.lecture09task.entity.User;
+import com.example.userapi.entity.User;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;

@@ -1,10 +1,10 @@
-package com.example.lecture09task.controller;
+package com.example.userapi.controller;
 
-import com.example.lecture09task.entity.User;
-import com.example.lecture09task.exception.ResourceNotFoundException;
-import com.example.lecture09task.form.CreateForm;
-import com.example.lecture09task.form.UpdateForm;
-import com.example.lecture09task.service.UserService;
+import com.example.userapi.entity.User;
+import com.example.userapi.exception.ResourceNotFoundException;
+import com.example.userapi.form.CreateForm;
+import com.example.userapi.form.UpdateForm;
+import com.example.userapi.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

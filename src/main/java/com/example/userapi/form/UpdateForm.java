@@ -1,6 +1,6 @@
-package com.example.lecture09task.form;
+package com.example.userapi.form;
 
-import com.example.lecture09task.entity.User;
+import com.example.userapi.entity.User;
 import lombok.Getter;
 
 @Getter

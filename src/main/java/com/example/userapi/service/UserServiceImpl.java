@@ -1,9 +1,9 @@
-package com.example.lecture09task.service;
+package com.example.userapi.service;
 
-import com.example.lecture09task.entity.User;
-import com.example.lecture09task.exception.ResourceNotFoundException;
-import com.example.lecture09task.form.CreateForm;
-import com.example.lecture09task.mapper.UserMapper;
+import com.example.userapi.entity.User;
+import com.example.userapi.exception.ResourceNotFoundException;
+import com.example.userapi.form.CreateForm;
+import com.example.userapi.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;

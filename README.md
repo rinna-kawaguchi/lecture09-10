@@ -24,11 +24,9 @@
 
 Dockerを起動し、ターミナルで以下のコマンドを実行する。  
 `docker compose up`  
-`docker compose exec db mysql -uroot -p`  
-パスワードを聞かれたら`password`と入力する。  
 
+src/main/java/com.
 Lecture09taskApplicationクラスを開き、実行する
-![Lecture09taskApplicationクラス実行.png](..%2F..%2FDesktop%2F%E3%83%AC%E3%82%A4%E3%82%BA%E3%83%86%E3%83%83%E3%82%AF%2F%E8%AA%B2%E9%A1%8C%E7%94%A8%2F%E8%AA%B2%E9%A1%8C%E7%AC%AC10%E5%9B%9E%2FREADME%2FLecture09taskApplication%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9F%E8%A1%8C.png)  
 
 Postmanを起動し、実行したい操作に応じてHTTPメソッドの選択、URLの入力、
 リクエストボディの入力を行い、Sendボタンを押すとレスポンスが返される。  

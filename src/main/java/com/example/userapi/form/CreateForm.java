@@ -1,4 +1,4 @@
-package com.example.lecture09task.form;
+package com.example.userapi.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
