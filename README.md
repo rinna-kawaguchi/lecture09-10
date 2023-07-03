@@ -52,7 +52,18 @@
 **自動テストの実行結果**  
 ![test-result.png](images%2Ftest-result.png)
 
-## ６．その他
+## ６．AWSへデプロイ
+＊現在は停止済み  
+- 使用したサービス
+  - VPC
+  - EC2
+  - RDS(MySQL)
+  - ロードバランサー
+
+- インフラ構成図  
+![infrastructure-diagram.png](images%2Finfrastructure-diagram.png)
+
+## ７．その他
 ### 苦労した点
 - **CRUD処理の実装**  
 最初は各クラスの繋がりが理解できず、 エラーが出てもどう解消すれば良いか分かりませんでした。
